@@ -1,4 +1,6 @@
+
 public class Main {
+
     public static void main(String[] args) {
         // 🧺 Almacén de ropa
         Almacen<String> almacenRopa = new Almacen<>();
@@ -19,7 +21,7 @@ public class Main {
         // 🎯 Mostrar productos recuperados
         System.out.println("\n🎯 Productos recuperados:");
         System.out.println("🧺 Ropa: " + almacenRopa.obtenerProducto());
-        System.out.println("🔢 Número: " + almacenNumeros.obtenerProducto());
+        System.out.println("🔢 Numero: " + almacenNumeros.obtenerProducto());
         System.out.println("🍏 Alimento: " + almacenAlimentos.obtenerProducto());
     }
 }

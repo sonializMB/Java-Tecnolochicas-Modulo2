@@ -2,35 +2,50 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
+
+    public static void mostrarOrdenes(List<? extends OrdenProduccion> lista) {
+        System.out.println("📋 Órdenes registradas:");
+        for (OrdenProduccion orden : lista) {
+            orden.mostrarResumen();
+        }
+        System.out.println();
+    }
+
+    // Metodo que modifica solo las órdenes personalizadas, mostrando un mensaje por el costo agregado.
+    public static void procesarPErsonalizadas(List<? super OrdenPersonalizada> lista, int costoAdicional){
+        System.out.println("\n💰 Procesando órdenes personalizadas... ");
+        lista.forEach(o ->{
+            if (o instanceof OrdenPersonalizada orden) {
+                System.out.println("✅ Orden " + orden.codigo+ " ajustada con costo adicional de $" + costoAdicional);
+            }
+        });
+    }
+
     public static void main(String[] args) {
 
-        // Lista de órdenes en masa
-        List<OrdenMasa> ordenesMasa = new ArrayList<>();
-        ordenesMasa.add(new OrdenMasa("A123", 500));
-        ordenesMasa.add(new OrdenMasa("A124", 750));
-
-        // Lista de órdenes personalizadas
-        List<OrdenPersonalizada> ordenesPersonalizadas = new ArrayList<>();
-        ordenesPersonalizadas.add(new OrdenPersonalizada("P456", 100, "ClienteSonia"));
-        ordenesPersonalizadas.add(new OrdenPersonalizada("P789", 150, "ClienteLiz"));
-
-        // Lista de prototipos
-        List<OrdenPrototipo> ordenesPrototipo = new ArrayList<>();
-        ordenesPrototipo.add(new OrdenPrototipo("T789", 10, "Diseño"));
-        ordenesPrototipo.add(new OrdenPrototipo("T790", 5, "Pruebas"));
+        // Creación de las listas para cada tipo de orden.
+        List<OrdenMasa> ordenMasa =
+                List.of(new OrdenMasa("A123", 500),
+                        new OrdenMasa("A124", 750));
+        List<OrdenPersonalizada> ordenPersonalizada =
+                List.of(new OrdenPersonalizada("P456",100, "ClienteX"),
+                        new OrdenPersonalizada("P789", 150, "ClienteY"));
+        List<OrdenPrototipo> ordenPrototipo =
+                List.of(new OrdenPrototipo("T789", 10, "Diseño"),
+                        new OrdenPrototipo("T790", 5, "Pruebas"));
 
         // Mostrar todas las órdenes
-        mostrarOrdenes(ordenesMasa);
-        mostrarOrdenes(ordenesPersonalizadas);
-        mostrarOrdenes(ordenesPrototipo);
+        mostrarOrdenes(ordenMasa);
+        mostrarOrdenes(ordenPersonalizada);
+        mostrarOrdenes(ordenPrototipo);
 
         // Procesar las ordenes personalizadas
-        procesarPErsonalizadas(new ArrayList<OrdenProduccion>(ordenesPersonalizadas), 200);
+        procesarPErsonalizadas(new ArrayList<OrdenProduccion>(ordenPersonalizada), 200);
 
         // Resumen
         System.out.println("📊 Resumen total de órdenes:");
-        System.out.println("🔧 Producción en masa: " + ordenesMasa.size());
-        System.out.println("🛠️ Personalizadas: " + ordenesPersonalizadas.size());
-        System.out.println("🧪 Prototipos: " + ordenesPrototipo.size());
+        System.out.println("🔧 Producción en masa: " + ordenMasa.size());
+        System.out.println("🛠️ Personalizadas: " + ordenPersonalizada.size());
+        System.out.println("🧪 Prototipos: " + ordenPrototipo.size());
     }
 }

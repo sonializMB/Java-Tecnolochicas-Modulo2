@@ -1,4 +1,5 @@
 public class OrdenPrototipo extends OrdenProduccion {
+
     private String faseDesarrollo;
 
     public OrdenPrototipo(String codigo, int cantidad, String faseDesarrollo) {
